@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA Football - Elite Soccer Coaching & Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #1a5f3f;
+            --light-green: #2d8659;
+            --accent-green: #4fb78f;
+            --white: #ffffff;
+            --off-white: #f8faf7;
+            --dark-text: #1a1a1a;
+            --light-text: #555555;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--white);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(26, 95, 63, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(26, 95, 63, 0.85) 0%, rgba(45, 134, 89, 0.85) 100%);
+            background-attachment: fixed;
+            color: var(--white);
+            padding: 140px 2rem 80px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transform: translate(100px, -100px);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-green);
+            padding: 15px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 2rem;
+            background-color: var(--off-white);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-green);
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-green);
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 0;
+            min-height: 360px;
+        }
+
+        .service-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-text {
+            padding: 4rem 3.5rem;
+            background: var(--white);
+        }
+
+        .service-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .service-text p {
+            color: var(--light-text);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 100%;
+            min-height: 360px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            min-height: 360px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .service-row.alt .service-text {
+            background: var(--off-white);
+        }
+
+        /* Image Placeholder Section */
+        .showcase-section {
+            padding: 80px 2rem;
+            background: var(--white);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--off-white) 0%, #e8ebe7 100%);
+            aspect-ratio: 4 / 3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--accent-green);
+            color: var(--light-text);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Coaches Section */
+        .coaches {
+            padding: 80px 2rem;
+            background-color: var(--off-white);
+        }
+
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .coach-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(26, 95, 63, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .coach-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(26, 95, 63, 0.15);
+        }
+
+        .coach-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--light-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .coach-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+        }
+
+        .coach-info {
+            padding: 1.5rem;
+        }
+
+        .coach-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+        }
+
+        .coach-specialty {
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .coach-info p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 80px 2rem;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: var(--white);
+        }
+
+        .events .section-title {
+            color: var(--white);
+        }
+
+        .events .section-title::after {
+            background: var(--white);
+        }
+
+        .event-highlight {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--white);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .event-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .event-highlight p {
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        /* Testimonials/Social Proof */
+        .testimonials {
+            padding: 80px 2rem;
+            background: var(--off-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(26, 95, 63, 0.08);
+        }
+
+        .stars {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial p {
+            color: var(--light-text);
+            margin-bottom: 1.2rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 2rem;
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .service-row {
+                grid-template-columns: 1fr;
+            }
+
+            .service-row.alt .service-img {
+                order: -1;
+            }
+
+            .coaches-grid,
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo"><img src="./gta-logo.png" alt="GTA Football" style="height: 50px; width: auto;"></div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#coaches">Coaches</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elite Soccer Coaching</h1>
+            <p>Transform your game with personalized coaching from experienced professionals, including OCAA Rookie of the Year, and semi-pro Cormac Obrien and McMaster center back Hamza Khan.</p>
+            <button class="cta-button">Start Training Today</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <h2 class="section-title">What We Offer</h2>
+            <!-- Personalized Training: text left, video right -->
+            <div class="service-row">
+                <div class="service-text">
+                    <h3>Personalized Training</h3>
+                    <p>Personalized training tailored to your skill level and goals. We offer both individual and group sessions.</p>
+                </div>
+                <div class="service-img"><video width="100%" height="100%" controls style="object-fit: cover;"><source src="./videos/video1.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
+            </div>
+
+            <!-- Cash Tournaments: image left, text right -->
+            <div class="service-row alt">
+                <div class="service-img"><img src="./imgs/1v1-tourny.png" alt="Cash Tournament"></div>
+                <div class="service-text">
+                    <h3>Cash Tournaments</h3>
+                    <p>Competitive events designed to challenge players of all levels. Win prizes in 1v1 and 3v3 tournaments.</p>
+                </div>
+            </div>
+
+            <!-- Performance Analysis: text left, image right -->
+            <div class="service-row">
+                <div class="service-text">
+                    <h3>Performance Analysis</h3>
+                    <p>Video analysis and feedback to track your progress. See improvements and identify areas for continued development.</p>
+                </div>
+                <div class="service-img"><img src="./imgs/Orange.jpg" alt="Performance Analysis"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Coaches Section -->
+    <section class="coaches" id="coaches">
+        <div class="section-container">
+            <h2 class="section-title">Meet Our Coaches</h2>
+            <div class="coaches-grid">
+                <div class="coach-card">
+                    <div class="coach-image"><img src="./imgs/ROY.jpeg" alt="Cormac Obrien"></div>
+                    <div class="coach-info">
+                        <h3>Cormac Obrien</h3>
+                        <div class="coach-specialty">OCAA Rookie of the Year · Semi Pro (Caledonian Braves) · Pro Youth (Larne FC, Sligo Rovers)</div>
+                        <p>OCAA Rookie of the Year and semi-professional player with elite technical ability and a passion for developing the next generation of talent.</p>
+                    </div>
+                </div>
+                <div class="coach-card">
+                    <div class="coach-image"><img src="./imgs/hamza-and-cormac.png" alt="Hamza Khan"></div>
+                    <div class="coach-info">
+                        <h3>Hamza Khan</h3>
+                        <div class="coach-specialty">McMaster University · Centre Back</div>
+                        <p>Competitive university-level defender at McMaster University, bringing tactical discipline and defensive expertise to every training session.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-container">
+            <h2 class="section-title">Player Success Stories</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Honestly my first touch used to be trash. Cormac kept drilling me on receiving the ball under pressure and after a few sessions it clicked. Felt it immediately in my next game."</p>
+                    <div class="testimonial-author">- Victor Awosika</div>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"The 3v3 tournaments are actually so fun. You get way more touches than a regular game and it forces you to think faster. Been coming back every time one drops."</p>
+                    <div class="testimonial-author">- Leandro Quan</div>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"What got me was how they broke down my positioning off the ball. I never really thought about where I was when my team had possession. That changed everything for me."</p>
+                    <div class="testimonial-author">- Clinton Owusu</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <h2 class="section-title">Get Started</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <strong>Instagram</strong>
+                        @gta.ftbl
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        gtaftbl@gmail.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone</strong>
+                        (437) 424-7486
+                    </div>
+                    <div class="contact-item">
+                        <strong>Location</strong>
+                        GTA Region
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Tell us about your goals..."></textarea>
+                    <button type="submit" class="cta-button">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 GTA Football. All rights reserved. | Elite Soccer Coaching & Training</p>
+    </footer>
+</body>
+</html>

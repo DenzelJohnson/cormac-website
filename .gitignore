@@ -1,0 +1,7 @@
+.DS_Store
+imgs/.DS_Store
+.agents/
+.claude/
+skills-lock.json
+imgs/hamza-cropped.png
+videos/*.mov
